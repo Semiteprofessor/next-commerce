@@ -1,25 +1,16 @@
+import { Shop } from "@/types/shop";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-export interface Shop {
-  _id: string;
-  name: string;
-  location?: string;
-  // add other fields as needed
-}
-
-// Define slice state type
 interface ShopsState {
   shops: Shop[];
   isLoading: boolean;
 }
 
-// Initial state
 const initialState: ShopsState = {
   shops: [],
   isLoading: true,
 };
 
-// Slice
 const slice = createSlice({
   name: "shops",
   initialState,
@@ -31,10 +22,6 @@ const slice = createSlice({
   },
 });
 
-// Reducer
 export default slice.reducer;
 
-// Actions
 export const { setShops } = slice.actions;
-
-// ----------------------------------------------------------------------
