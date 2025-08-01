@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: ["class"],
@@ -103,6 +104,43 @@ const config: Config = {
         DEFAULT: "8px", // equivalent to `shape.borderRadius`
         sm: "12px", // equivalent to `shape.borderRadiusSm`
         md: "16px", // equivalent to `shape.borderRadiusMd`
+      },
+      fontFamily: {
+        sans: ["var(--font-figtree)", ...fontFamily.sans], // uses next/font/google Figtree
+      },
+      fontWeight: {
+        regular: "400",
+        medium: "600",
+        bold: "700",
+        extrabold: "800",
+        black: "900",
+      },
+      fontSize: {
+        h1: ["2.5rem", { lineHeight: "1.25", fontWeight: "900" }], // 40px → 64px
+        h2: ["2rem", { lineHeight: "1.33", fontWeight: "700" }], // 32px → 48px
+        h3: ["1.5rem", { lineHeight: "1.5", fontWeight: "700" }], // 24px → 32px
+        h4: ["1.25rem", { lineHeight: "1.5", fontWeight: "700" }], // 20px → 24px
+        h5: ["1.125rem", { lineHeight: "1.5", fontWeight: "700" }], // 18px → 20px
+        h6: ["1.0625rem", { lineHeight: "1.55", fontWeight: "700" }], // 17px → 18px
+        subtitle1: ["1rem", { lineHeight: "1.5", fontWeight: "600" }], // 16px
+        subtitle2: ["0.875rem", { lineHeight: "1.57", fontWeight: "600" }], // 14px
+        body1: ["1rem", { lineHeight: "1.5" }], // 16px
+        body2: ["0.75rem", { lineHeight: "1.57" }], // 12px
+        caption: ["0.625rem", { lineHeight: "1.5" }], // 10px
+        overline: [
+          "0.75rem",
+          {
+            lineHeight: "1.5",
+            letterSpacing: "0.1em",
+            fontWeight: "700",
+          },
+        ],
+        button: ["0.875rem", { lineHeight: "1.7", fontWeight: "700" }],
+      },
+      screens: {
+        sm: "600px",
+        md: "900px",
+        lg: "1200px",
       },
     },
   },
