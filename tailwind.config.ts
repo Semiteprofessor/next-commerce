@@ -82,7 +82,23 @@ const config: Config = {
           background: "radial-gradient(#DBEAFF, #F3DFE0, #DBCFF3, #DBEAFF)",
         },
       },
-      
+      boxShadow: {
+        // Elevation shadows (like MUI levels)
+        z1: "0 3px 6px rgb(48 51 128 / 0.10)",
+        z8: "0 8px 16px 0 rgb(0 0 0 / 0.24)",
+        z12: "0 0 2px 0 rgb(0 0 0 / 0.24), 0 12px 24px 0 rgb(0 0 0 / 0.24)",
+        z16: "0 0 2px 0 rgb(0 0 0 / 0.24), 0 16px 32px -4px rgb(0 0 0 / 0.24)",
+        z20: "0 0 2px 0 rgb(0 0 0 / 0.24), 0 20px 40px -4px rgb(0 0 0 / 0.24)",
+        z24: "0 0 4px 0 rgb(0 0 0 / 0.24), 0 24px 48px 0 rgb(0 0 0 / 0.24)",
+
+        // Color shadows (mapped from your MUI code)
+        primary: "0px 8px 16px rgb(238 30 80 / 0.56)",      // palette.primary.main
+        secondary: "-4px -4px 20px rgb(34 136 235 / 0.24)", // palette.secondary.main
+        info: "0px 8px 16px rgb(51 181 230 / 0.24)",        // palette.info.main
+        success: "0px 8px 16px rgb(38 193 150 / 0.24)",     // palette.success.main
+        warning: "0px 8px 16px rgb(249 166 0 / 0.24)",      // palette.warning.main
+        error: "0px 8px 16px rgb(229 52 47 / 0.24)",        // palette.error.main
+      },
     },
   },
   plugins: [],
