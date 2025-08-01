@@ -138,9 +138,11 @@ const config: Config = {
         button: ["0.875rem", { lineHeight: "1.7", fontWeight: "700" }],
       },
       screens: {
+        xs: "0px", // optional in Tailwind (usually 'mobile-first')
         sm: "600px",
-        md: "900px",
-        lg: "1200px",
+        md: "900px", // OLD 960
+        lg: "1200px", // OLD 1280
+        xl: "1536px", // OLD 1920
       },
     },
   },
