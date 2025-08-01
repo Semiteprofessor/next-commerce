@@ -1,10 +1,10 @@
 import React, { ReactNode } from "react";
 
 // components
-// import Navbar from "src/layout/_main/navbar";
-// import Footer from "src/layout/_main/footer";
-// import Topbar from "src/layout/_main/topbar";
-// import ActionBar from "src/layout/_main/actionbar";
+// import Navbar from "../../layout/_main/navbar";
+// import Footer from "../../layout/_main/footer";
+import Topbar from "../../layout/_main/topbar";
+// import ActionBar from "../../layout/_main/actionbar";
 
 // Meta information
 export const metadata = {
@@ -37,12 +37,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <Topbar />
-      <Navbar />
-      <ActionBar />
+      {/* <Navbar /> */}
+      {/* <ActionBar /> */}
       <main>{children}</main>
       {/* Replaced MUI Toolbar with Tailwind spacer */}
       <div className="block md:hidden h-12" />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
