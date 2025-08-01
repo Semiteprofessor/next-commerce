@@ -1,11 +1,5 @@
+import { SettingsState } from "@/types/setting";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface SettingsState {
-  themeMode: "light" | "dark";
-  openSidebar: boolean;
-  currency: string;
-  rate: number;
-}
 
 const initialState: SettingsState = {
   themeMode: "light",

@@ -1,17 +1,5 @@
+import { CompareProduct, CompareState } from "@/types/compare";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface CompareProduct {
-  _id: string;
-  name: string;
-  price: number;
-  imageUrl?: string;
-  brand?: string;
-  [key: string]: unknown;
-}
-
-export interface CompareState {
-  products: CompareProduct[];
-}
 
 const initialState: CompareState = {
   products: [],

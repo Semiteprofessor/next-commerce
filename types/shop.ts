@@ -49,3 +49,8 @@ export interface Shop {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ShopsState {
+  shops: Shop[];
+  isLoading: boolean;
+}

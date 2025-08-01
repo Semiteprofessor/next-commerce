@@ -1,10 +1,5 @@
-import { Shop } from "@/types/shop";
+import { Shop, ShopsState } from "@/types/shop";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface ShopsState {
-  shops: Shop[];
-  isLoading: boolean;
-}
 
 const initialState: ShopsState = {
   shops: [],
