@@ -16,7 +16,7 @@ const initialState: BrandsState = {
   isLoading: true,
 };
 
-const slice = createSlice({
+const brandsSlice = createSlice({
   name: "brands",
   initialState,
   reducers: {
@@ -33,6 +33,6 @@ const slice = createSlice({
   },
 });
 
-export default slice.reducer;
+export default brandsSlice.reducer;
 
-export const { setBrands, startLoading, stopLoading } = slice.actions;
+export const { setBrands, startLoading, stopLoading } = brandsSlice.actions;

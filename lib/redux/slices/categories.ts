@@ -25,7 +25,7 @@ const initialState: CategoriesState = {
   isLoading: true,
 };
 
-const slice = createSlice({
+const categoriesSlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
@@ -48,7 +48,7 @@ const slice = createSlice({
   },
 });
 
-export default slice.reducer;
+export default categoriesSlice.reducer;
 
 export const { setCategories, startLoading, stopLoading, resetCategories } =
-  slice.actions;
+  categoriesSlice.actions;
