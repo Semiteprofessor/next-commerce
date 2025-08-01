@@ -17,7 +17,7 @@ const initialState: CompareState = {
   products: [],
 };
 
-const compareSlice = createSlice({
+const slice = createSlice({
   name: "compare",
   initialState,
   reducers: {
@@ -37,7 +37,7 @@ const compareSlice = createSlice({
   },
 });
 
-export default compareSlice.reducer;
+export default slice.reducer;
 
 export const { addCompareProduct, removeCompareProduct, resetCompareProducts } =
-  compareSlice.actions;
+  slice.actions;

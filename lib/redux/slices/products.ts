@@ -42,7 +42,7 @@ const initialState: { checkout: CheckoutState } = {
   },
 };
 
-const productSlice = createSlice({
+const slice = createSlice({
   name: "product",
   initialState,
   reducers: {
@@ -156,7 +156,7 @@ const productSlice = createSlice({
   },
 });
 
-export default productSlice.reducer;
+export default slice.reducer;
 
 export const {
   getCart,
@@ -170,4 +170,4 @@ export const {
   onGotoStep,
   onNextStep,
   onBackStep,
-} = productSlice.actions;
+} = slice.actions;
