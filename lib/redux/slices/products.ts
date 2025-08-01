@@ -1,17 +1,8 @@
 import { sum, map, filter, uniqBy } from "lodash";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Product } from "@/types/product";
 
 const shippingFee = parseInt(process.env.SHIPPING_FEE || "0", 10);
-
-interface Product {
-  _id: string;
-  sku: string;
-  price: number;
-  priceSale?: number;
-  size?: string;
-  color?: string;
-  quantity: number;
-}
 
 interface BillingInfo {
   name: string;
@@ -66,7 +57,7 @@ const slice = createSlice({
       const product = action.payload;
       const updatedProduct = {
         ...product,
-        sku: `${product.sku}-${product.size}-${product.color}`,
+        sku: `${product.sku}-${product.size}-${product.colors}`,
       };
 
       const existing = state.checkout.cart.find(

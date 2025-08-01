@@ -6,7 +6,7 @@ export interface CompareProduct {
   price: number;
   imageUrl?: string;
   brand?: string;
-  [key: string]: unknown; // allows flexibility for extra product fields
+  [key: string]: unknown;
 }
 
 export interface CompareState {

@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-// ----------------------------------------------------------------------
-
-// Define the state type
 export interface SettingsState {
   themeMode: "light" | "dark";
   openSidebar: boolean;
@@ -10,7 +7,6 @@ export interface SettingsState {
   rate: number;
 }
 
-// Initial state
 const initialState: SettingsState = {
   themeMode: "light",
   openSidebar: false,
