@@ -29,7 +29,7 @@ export default function UserTopbar() {
   //   );
 
   return (
-    <div className="hidden md:flex w-full bg-background border-b z-50 bg-red-300">
+    <div className="hidden md:flex w-full bg-background border-b z-50 bg-red-600">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2 text-sm">
         {/* Left side - contact info */}
         <div className="flex items-center gap-2">
