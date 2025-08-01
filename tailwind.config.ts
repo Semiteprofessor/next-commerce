@@ -92,12 +92,17 @@ const config: Config = {
         z24: "0 0 4px 0 rgb(0 0 0 / 0.24), 0 24px 48px 0 rgb(0 0 0 / 0.24)",
 
         // Color shadows (mapped from your MUI code)
-        primary: "0px 8px 16px rgb(238 30 80 / 0.56)",      // palette.primary.main
+        primary: "0px 8px 16px rgb(238 30 80 / 0.56)", // palette.primary.main
         secondary: "-4px -4px 20px rgb(34 136 235 / 0.24)", // palette.secondary.main
-        info: "0px 8px 16px rgb(51 181 230 / 0.24)",        // palette.info.main
-        success: "0px 8px 16px rgb(38 193 150 / 0.24)",     // palette.success.main
-        warning: "0px 8px 16px rgb(249 166 0 / 0.24)",      // palette.warning.main
-        error: "0px 8px 16px rgb(229 52 47 / 0.24)",        // palette.error.main
+        info: "0px 8px 16px rgb(51 181 230 / 0.24)", // palette.info.main
+        success: "0px 8px 16px rgb(38 193 150 / 0.24)", // palette.success.main
+        warning: "0px 8px 16px rgb(249 166 0 / 0.24)", // palette.warning.main
+        error: "0px 8px 16px rgb(229 52 47 / 0.24)", // palette.error.main
+      },
+      borderRadius: {
+        DEFAULT: "8px", // equivalent to `shape.borderRadius`
+        sm: "12px", // equivalent to `shape.borderRadiusSm`
+        md: "16px", // equivalent to `shape.borderRadiusMd`
       },
     },
   },
