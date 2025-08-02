@@ -1,18 +1,30 @@
-import { AddBrandPayload, AddCategoryPayload, AddSubCategoryPayload, AdminDashboardAnalytics, SubCategory, UpdateBrandPayload, UpdateCategoryPayload, UpdateSubCategoryPayload } from "../types/admin";
+import {
+  AddBrandPayload,
+  AddCategoryPayload,
+  AddSubCategoryPayload,
+  AdminDashboardAnalytics,
+  SubCategory,
+  UpdateBrandPayload,
+  UpdateCategoryPayload,
+  UpdateSubCategoryPayload,
+} from "../types/admin";
 import { AuthResponse } from "../types/auth";
 import { Brand } from "../types/brand";
 import { Category } from "../types/category";
 import { CouponCode } from "../types/coupon-code";
+import { Currency } from "../types/currency";
 import { ForgetPasswordPayload } from "../types/forgot-password";
 import { LoginPayload } from "../types/login";
 import { Order } from "../types/order";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
+import { Payment } from "../types/payment";
 import { Product } from "../types/product";
 import { RegisterPayload, RegisterResponse } from "../types/register";
 import {
   ResetPasswordPayload,
   ResetPasswordResponse,
 } from "../types/reset-password";
+import { Shop } from "../types/shop";
 import { User } from "../types/user";
 import http from "./http";
 
@@ -79,7 +91,6 @@ export const getNotifications = async (
   return data;
 };
 
-
 export const getBrandsByAdmin = async (
   page: number,
   search?: string
@@ -126,7 +137,6 @@ export const deleteBrandByAdmin = async (
   );
   return data;
 };
-
 
 export const getCategoriesByAdmin = async (
   page: number,
@@ -366,6 +376,141 @@ export const deleteCouponCodeByAdmin = async (
   );
   return response;
 };
+
+// ------------------- Newsletter -------------------
+
+export const getNewsletter = async (page: number): Promise<any> => {
+  const { data } = await http.get(`/admin/newsletter?page=${page}`);
+  return data;
+};
+
+// ------------------- Shops -------------------
+
+export const getShopDetailsByAdmin = async (slug: string): Promise<Shop> => {
+  const { data } = await http.get<Shop>(`/admin/shops/${slug}`);
+  return data;
+};
+
+export const addAdminShopByAdmin = async (payload: Shop): Promise<Shop> => {
+  const { data } = await http.post<Shop>(`/admin/shops`, payload);
+  return data;
+};
+
+export const updateAdminShopByAdmin = async ({
+  currentSlug,
+  ...payload
+}: Shop & { currentSlug: string }): Promise<Shop> => {
+  const { data } = await http.put<Shop>(`/admin/shops/${currentSlug}`, payload);
+  return data;
+};
+
+export const deleteShop = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data: response } = await http.delete<{ message: string }>(
+    `/admin/shops/${slug}`
+  );
+  return response;
+};
+
+export const getLowStockProductsByAdmin = async (
+  page: number
+): Promise<any[]> => {
+  const { data: response } = await http.get<any[]>(
+    `/admin/low-stock-products?page=${page}`
+  );
+  return response;
+};
+
+export const getShopsByAdmin = async (
+  page: number,
+  search?: string
+): Promise<Shop[]> => {
+  const { data: response } = await http.get<Shop[]>(
+    `/admin/shops?search=${search || ""}&page=${page}`
+  );
+  return response;
+};
+
+export const getShopIncomeByAdmin = async (
+  slug: string,
+  page?: number
+): Promise<any> => {
+  const { data } = await http.get(
+    `/admin/shops/${slug}/income?page=${page || 1}`
+  );
+  return data;
+};
+
+// ------------------- Payments -------------------
+
+export const getIncomeDetailsByAdmin = async (
+  pid: string,
+  page?: number
+): Promise<Payment[]> => {
+  const { data } = await http.get<Payment[]>(
+    `/admin/payments/${pid}?page=${page || 1}`
+  );
+  return data;
+};
+
+export const editPaymentByAdmin = async (
+  payload: Payment & { pid: string }
+): Promise<Payment> => {
+  const { pid, ...rest } = payload;
+  const { data } = await http.put<Payment>(`/admin/payments/${pid}`, rest);
+  return data;
+};
+
+export const createPaymentByAdmin = async (
+  payload: Partial<Payment>
+): Promise<Payment> => {
+  const { data } = await http.post<Payment>(`/admin/payments`, payload);
+  return data;
+};
+
+export const getPayoutsByAdmin = async (params: string): Promise<any[]> => {
+  const { data } = await http.get<any[]>(`/admin/payouts?${params}`);
+  return data;
+};
+
+// ------------------- Currencies -------------------
+
+export const getAllShopsByAdmin = async (): Promise<Shop[]> => {
+  const { data } = await http.get<Shop[]>(`/admin/all-shops`);
+  return data;
+};
+
+export const getCurrenciesByAdmin = async (
+  page?: number,
+  search?: string
+): Promise<Currency[]> => {
+  const { data } = await http.get<Currency[]>(
+    `/admin/currencies?page=${page || 1}&search=${search || ""}`
+  );
+  return data;
+};
+
+export const addCurrencyByAdmin = async (
+  payload: Currency
+): Promise<Currency> => {
+  const { data } = await http.post<Currency>(`/admin/currencies`, payload);
+  return data;
+};
+
+export const updateCurrencyByAdmin = async ({
+  _id,
+  ...others
+}: Currency): Promise<Currency> => {
+  const { data } = await http.put<Currency>(`/admin/currencies/${_id}`, others);
+  return data;
+};
+
+export const getCurrencyByAdmin = async (cid: string): Promise<Currency> => {
+  const { data } = await http.get<Currency>(`/admin/currencies/${cid}`);
+  return data;
+};
+
 // export const getProducts = async <T = any>(
 //   query = "",
 //   category?: string,
