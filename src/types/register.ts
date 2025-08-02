@@ -3,9 +3,10 @@ export interface RegisterPayload {
   lastName: string;
   email: string;
   password: string;
-  gender: "male" | "female" | "other";
   phone: string;
-  otp: string;
+  gender: "male" | "female" | "other";
+  role?: "user" | "vendor";
+  otp?: string;
 }
 
 export interface RegisterResponse {

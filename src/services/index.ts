@@ -41,6 +41,33 @@ export const forgetPassword = async (
   return data;
 };
 
+
+export const resetPassword = async (
+  payload: ResetPasswordPayload
+): Promise<ResetPasswordResponse> => {
+  const { data } = await http.post<ResetPasswordResponse>(
+    "/auth/reset-password",
+    payload
+  );
+  return data;
+};
+
+export const adminDashboardAnalytics =
+  async (): Promise<AdminDashboardAnalytics> => {
+    const { data } = await http.get<AdminDashboardAnalytics>(
+      "/admin/dashboard-analytics"
+    );
+    return data;
+  };
+
+export const getNotifications = async (
+  page: number
+): Promise<Notification[]> => {
+  const { data } = await http.get<Notification[]>(
+    `/admin/notifications?limit=${page}`
+  );
+  return data;
+};
 export const getProducts = async <T = any>(
   query = "",
   category?: string,
