@@ -1,6 +1,6 @@
 import { sum, map, filter, uniqBy } from "lodash";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "@/types/product";
+import { Product } from "@/src/types/product";
 
 const shippingFee = parseInt(process.env.SHIPPING_FEE || "0", 10);
 

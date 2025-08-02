@@ -1,4 +1,4 @@
-import { CompareProduct, CompareState } from "@/types/compare";
+import { CompareProduct, CompareState } from "@/src/types/compare";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: CompareState = {

@@ -1,4 +1,4 @@
-import { Shop, ShopsState } from "@/types/shop";
+import { Shop, ShopsState } from "@/src/types/shop";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ShopsState = {

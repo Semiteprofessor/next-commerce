@@ -1,4 +1,4 @@
-import { Brand } from "@/types/brand";
+import { Brand } from "@/src/types/brand";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface BrandsState {

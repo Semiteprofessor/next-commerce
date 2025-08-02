@@ -1,4 +1,4 @@
-import { SettingsState } from "@/types/setting";
+import { SettingsState } from "@/src/types/setting";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: SettingsState = {
