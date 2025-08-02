@@ -1,7 +1,7 @@
+import { LoginPayload, LoginResponse } from "../types/login";
+import { RegisterPayload, RegisterResponse } from "../types/register";
 import http from "./http";
 
-
-// Typed function
 export const register = async (
   payload: RegisterPayload
 ): Promise<RegisterResponse> => {
@@ -9,29 +9,11 @@ export const register = async (
   return data;
 };
 
-// Another example: login
-export interface LoginPayload {
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
-  token: string;
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    role: string;
-  };
-}
-
 export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
   const { data } = await http.post<LoginResponse>("/auth/login", payload);
   return data;
 };
 
-// Generic GET function with query parameters
 export const getProducts = async <T = any>(
   query = "",
   category?: string,
