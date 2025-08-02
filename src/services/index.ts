@@ -1,4 +1,7 @@
-import { LoginPayload, LoginResponse } from "../types/login";
+import { AuthResponse } from "../types/auth";
+import { ForgetPasswordPayload } from "../types/forgot-password";
+import { LoginPayload } from "../types/login";
+import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
 import { RegisterPayload, RegisterResponse } from "../types/register";
 import http from "./http";
 
@@ -9,8 +12,32 @@ export const register = async (
   return data;
 };
 
-export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
-  const { data } = await http.post<LoginResponse>("/auth/login", payload);
+export const verifyOTP = async (
+  payload: VerifyOTPPayload
+): Promise<AuthResponse> => {
+  const { data } = await http.post<AuthResponse>("/auth/verify-otp", payload);
+  return data;
+};
+
+export const resendOTP = async (
+  payload: ResendOTPPayload
+): Promise<AuthResponse> => {
+  const { data } = await http.post<AuthResponse>("/auth/resend-otp", payload);
+  return data;
+};
+
+export const login = async (payload: LoginPayload): Promise<AuthResponse> => {
+  const { data } = await http.post<AuthResponse>("/auth/login", payload);
+  return data;
+};
+
+export const forgetPassword = async (
+  payload: ForgetPasswordPayload
+): Promise<AuthResponse> => {
+  const { data } = await http.post<AuthResponse>(
+    "/auth/forget-password",
+    payload
+  );
   return data;
 };
 
