@@ -1,3 +1,4 @@
+import { Address } from "../types/address";
 import {
   AddBrandPayload,
   AddCategoryPayload,
@@ -16,6 +17,7 @@ import { CouponCode } from "../types/coupon-code";
 import { Currency } from "../types/currency";
 import { ForgetPasswordPayload } from "../types/forgot-password";
 import { LoginPayload } from "../types/login";
+import { NewsletterPayload } from "../types/newsletter";
 import { Order } from "../types/order";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
 import { Payment } from "../types/payment";
@@ -26,8 +28,9 @@ import {
   ResetPasswordResponse,
 } from "../types/reset-password";
 import { Review, ReviewPayload } from "../types/review";
+import { SearchPayload } from "../types/search";
 import { Shop } from "../types/shop";
-import { User } from "../types/user";
+import { User, UserProfile } from "../types/user";
 import { VendorProduct } from "../types/vendor";
 import http from "./http";
 
@@ -771,5 +774,103 @@ export const getProductReviews = async (pid: string): Promise<Review[]> => {
 
 export const addReview = async (payload: ReviewPayload): Promise<Review> => {
   const { data } = await http.post<Review>(`/reviews`, payload);
+  return data;
+};
+
+export const getUserInvoice = async (page: number): Promise<Invoice[]> => {
+  const { data } = await http.get<Invoice[]>(`/users/invoice?page=${page}`);
+  return data;
+};
+
+export const updateProfile = async (
+  payload: Partial<UserProfile>
+): Promise<UserProfile> => {
+  const { data } = await http.put<UserProfile>("/users/profile", payload);
+  return data;
+};
+
+export const changePassword = async (payload: {
+  oldPassword: string;
+  newPassword: string;
+}): Promise<{ success: boolean }> => {
+  const { data } = await http.put<{ success: boolean }>(
+    "/users/change-password",
+    payload
+  );
+  return data;
+};
+
+// Address API
+export const getAddress = async (userId: string): Promise<Address[]> => {
+  const { data } = await http.get<Address[]>(`/users/addresses?id=${userId}`);
+  return data;
+};
+
+export const updateAddress = async (payload: Address): Promise<Address> => {
+  const { _id, ...rest } = payload;
+  const { data } = await http.put<Address>(`/users/addresses/${_id}`, rest);
+  return data;
+};
+
+export const createAddress = async (
+  payload: Omit<Address, "_id">
+): Promise<Address> => {
+  const { data } = await http.post<Address>("/users/addresses", payload);
+  return data;
+};
+
+export const deleteAddress = async (
+  _id: string
+): Promise<{ success: boolean }> => {
+  const { data } = await http.delete<{ success: boolean }>(
+    `/users/addresses/${_id}`
+  );
+  return data;
+};
+
+// Search API
+export const search = async (payload: SearchPayload): Promise<any[]> => {
+  const { data } = await http.post<any[]>("/search", payload);
+  return data;
+};
+
+export const getSearchFilters = async (): Promise<Record<string, any>> => {
+  const { data } = await http.get<Record<string, any>>("/search-filters");
+  return data;
+};
+
+// Orders and Layout
+export const getInvoices = async (): Promise<Invoice[]> => {
+  const { data } = await http.get<Invoice[]>("/users/invoice");
+  return data;
+};
+
+export const placeOrder = async (payload: any): Promise<any> => {
+  const { data } = await http.post<any>("/orders", payload);
+  return data;
+};
+
+export const getLayout = async (): Promise<any> => {
+  const { data } = await http.get<any>("/layout");
+  return data;
+};
+
+// File and Newsletter
+export const singleDeleteFile = async (
+  id: string
+): Promise<{ success: boolean }> => {
+  const { data } = await http.delete<{ success: boolean }>(
+    `/delete-file/${id}`
+  );
+  return data;
+};
+
+export const sendNewsletter = async (
+  payload: NewsletterPayload
+): Promise<{ success: boolean }> => {
+  const { data } = await http.post<{ success: boolean }>(
+    "/newsletter",
+    payload
+  );
   return data;
 };
