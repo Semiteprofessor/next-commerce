@@ -1,6 +1,7 @@
-import { AddBrandPayload, AdminDashboardAnalytics, UpdateBrandPayload } from "../types/admin";
+import { AddBrandPayload, AddCategoryPayload, AddSubCategoryPayload, AdminDashboardAnalytics, SubCategory, UpdateBrandPayload, UpdateCategoryPayload, UpdateSubCategoryPayload } from "../types/admin";
 import { AuthResponse } from "../types/auth";
 import { Brand } from "../types/brand";
+import { Category } from "../types/category";
 import { ForgetPasswordPayload } from "../types/forgot-password";
 import { LoginPayload } from "../types/login";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
@@ -122,6 +123,101 @@ export const deleteBrandByAdmin = async (
   return data;
 };
 
+
+export const getCategoriesByAdmin = async (
+  page: number,
+  search?: string
+): Promise<Category[]> => {
+  const { data } = await http.get<Category[]>(
+    `/admin/categories?search=${search || ""}&page=${page}`
+  );
+  return data;
+};
+
+export const getCategoryByAdmin = async (slug: string): Promise<Category> => {
+  const { data } = await http.get<Category>(`/admin/categories/${slug}`);
+  return data;
+};
+
+export const deleteCategoryByAdmin = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data } = await http.delete<{ message: string }>(
+    `/admin/categories/${slug}`
+  );
+  return data;
+};
+
+export const addCategoryByAdmin = async (
+  payload: AddCategoryPayload
+): Promise<Category> => {
+  const { data } = await http.post<Category>(`/admin/categories`, payload);
+  return data;
+};
+
+export const updateCategoryByAdmin = async (
+  payload: UpdateCategoryPayload
+): Promise<Category> => {
+  const { currentSlug, ...others } = payload;
+  const { data } = await http.put<Category>(
+    `/admin/categories/${currentSlug}`,
+    others
+  );
+  return data;
+};
+
+export const getAllCategoriesByAdmin = async (): Promise<Category[]> => {
+  const { data } = await http.get<Category[]>(`/admin/all-categories`);
+  return data;
+};
+
+// ------------------- Subcategories -------------------
+
+export const getSubCategoryByAdmin = async (
+  slug: string
+): Promise<SubCategory> => {
+  const { data } = await http.get<SubCategory>(`/admin/subcategories/${slug}`);
+  return data;
+};
+
+export const getSubCategoriesByAdmin = async (
+  params: string
+): Promise<SubCategory[]> => {
+  const { data } = await http.get<SubCategory[]>(
+    `/admin/subcategories?${params}`
+  );
+  return data;
+};
+
+export const deleteSubCategoryByAdmin = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data } = await http.delete<{ message: string }>(
+    `/admin/subcategories/${slug}`
+  );
+  return data;
+};
+
+export const addSubCategoryByAdmin = async (
+  payload: AddSubCategoryPayload
+): Promise<SubCategory> => {
+  const { data } = await http.post<SubCategory>(
+    `/admin/subcategories`,
+    payload
+  );
+  return data;
+};
+
+export const updateSubCategoryByAdmin = async (
+  payload: UpdateSubCategoryPayload
+): Promise<SubCategory> => {
+  const { currentSlug, ...others } = payload;
+  const { data } = await http.put<SubCategory>(
+    `/admin/subcategories/${currentSlug}`,
+    others
+  );
+  return data;
+};
 // export const getProducts = async <T = any>(
 //   query = "",
 //   category?: string,
