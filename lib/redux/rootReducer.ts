@@ -12,8 +12,6 @@ import categoriesReducer from "./slices/categories";
 import brandsReducer from "./slices/brands";
 import shopsReducer from "./slices/shops";
 
-// ----------------------------------------------------------------------
-// Define root state type
 export interface RootState {
   product: ReturnType<typeof productReducer>;
   user: ReturnType<typeof userReducer>;
@@ -25,8 +23,6 @@ export interface RootState {
   shops: ReturnType<typeof shopsReducer>;
 }
 
-// ----------------------------------------------------------------------
-// Persist configs
 const rootPersistConfig: PersistConfig<RootState> = {
   key: "root",
   storage,
