@@ -2,14 +2,18 @@ import { AddBrandPayload, AddCategoryPayload, AddSubCategoryPayload, AdminDashbo
 import { AuthResponse } from "../types/auth";
 import { Brand } from "../types/brand";
 import { Category } from "../types/category";
+import { CouponCode } from "../types/coupon-code";
 import { ForgetPasswordPayload } from "../types/forgot-password";
 import { LoginPayload } from "../types/login";
+import { Order } from "../types/order";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
+import { Product } from "../types/product";
 import { RegisterPayload, RegisterResponse } from "../types/register";
 import {
   ResetPasswordPayload,
   ResetPasswordResponse,
 } from "../types/reset-password";
+import { User } from "../types/user";
 import http from "./http";
 
 export const register = async (
@@ -217,6 +221,150 @@ export const updateSubCategoryByAdmin = async (
     others
   );
   return data;
+};
+
+export const getProductsByAdmin = async (
+  params: string
+): Promise<Product[]> => {
+  const { data: response } = await http.get<Product[]>(
+    `/admin/products?${params}`
+  );
+  return response;
+};
+
+export const createProductByAdmin = async (
+  payload: Product
+): Promise<Product> => {
+  const { data: response } = await http.post<Product>(
+    `/admin/products`,
+    payload
+  );
+  return response;
+};
+
+export const updateProductByAdmin = async ({
+  currentSlug,
+  ...payload
+}: Product & { currentSlug: string }): Promise<Product> => {
+  const { data: response } = await http.put<Product>(
+    `/admin/products/${currentSlug}`,
+    payload
+  );
+  return response;
+};
+
+export const deleteProductByAdmin = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data: response } = await http.delete<{ message: string }>(
+    `/admin/products/${slug}`
+  );
+  return response;
+};
+
+// ------------------- Orders -------------------
+
+export const getOrdersByAdmin = async (params: string): Promise<Order[]> => {
+  const { data } = await http.get<Order[]>(`/admin/orders?${params}`);
+  return data;
+};
+
+export const getOrderByAdmin = async (id: string): Promise<Order> => {
+  const { data } = await http.get<Order>(`/admin/orders/${id}`);
+  return data;
+};
+
+export const deleteOrderByAdmin = async (
+  id: string
+): Promise<{ message: string }> => {
+  const { data } = await http.delete<{ message: string }>(
+    `/admin/orders/${id}`
+  );
+  return data;
+};
+
+export const updateOrderStatus = async (
+  id: string,
+  payload: Partial<Order>
+): Promise<Order> => {
+  const { data } = await http.put<Order>(`/admin/orders/${id}`, payload);
+  return data;
+};
+
+// ------------------- Users -------------------
+
+export const getUsersByAdmin = async (
+  page: number,
+  search?: string
+): Promise<User[]> => {
+  const { data: response } = await http.get<User[]>(
+    `/admin/users?search=${search || ""}&page=${page}`
+  );
+  return response;
+};
+
+export const getUserByAdmin = async (id: string): Promise<User> => {
+  const { data: response } = await http.get<User>(`/admin/users/${id}`);
+  return response;
+};
+
+export const updateUserRoleByAdmin = async (
+  id: string,
+  role: string
+): Promise<User> => {
+  const { data: response } = await http.post<User>(`/admin/users/role/${id}`, {
+    role,
+  });
+  return response;
+};
+
+// ------------------- Coupon Codes -------------------
+
+export const getCouponCodesByAdmin = async (
+  page: number,
+  search?: string
+): Promise<CouponCode[]> => {
+  const { data: response } = await http.get<CouponCode[]>(
+    `/admin/coupon-codes?search=${search || ""}&page=${page}`
+  );
+  return response;
+};
+
+export const getCouponCodeByAdmin = async (id: string): Promise<CouponCode> => {
+  const { data: response } = await http.get<CouponCode>(
+    `/admin/coupon-codes/${id}`
+  );
+  return response;
+};
+
+export const addCouponCodeByAdmin = async (
+  payload: CouponCode
+): Promise<CouponCode> => {
+  const { data: response } = await http.post<CouponCode>(
+    `/admin/coupon-codes`,
+    payload
+  );
+  return response;
+};
+
+export const updateCouponCodeByAdmin = async ({
+  currentId,
+  ...others
+}: CouponCode & { currentId: string }): Promise<CouponCode> => {
+  const { data: response } = await http.put<CouponCode>(
+    `/admin/coupon-codes/${currentId}`,
+    others
+  );
+  return response;
+};
+
+export const deleteCouponCodeByAdmin = async (
+  id: string
+): Promise<{ message: string }> => {
+  const { data: response } = await http.delete<{ message: string }>(
+    `/admin/coupon-codes/${id}`
+  );
+  return response;
 };
 // export const getProducts = async <T = any>(
 //   query = "",
