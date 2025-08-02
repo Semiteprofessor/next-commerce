@@ -3,6 +3,7 @@ import { ForgetPasswordPayload } from "../types/forgot-password";
 import { LoginPayload } from "../types/login";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
 import { RegisterPayload, RegisterResponse } from "../types/register";
+import { ResetPasswordPayload, ResetPasswordResponse } from "../types/reset-password";
 import http from "./http";
 
 export const register = async (
