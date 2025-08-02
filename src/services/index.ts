@@ -11,6 +11,7 @@ import {
 import { AuthResponse } from "../types/auth";
 import { Brand } from "../types/brand";
 import { Category } from "../types/category";
+import { Compaign } from "../types/compaign";
 import { CouponCode } from "../types/coupon-code";
 import { Currency } from "../types/currency";
 import { ForgetPasswordPayload } from "../types/forgot-password";
@@ -18,14 +19,16 @@ import { LoginPayload } from "../types/login";
 import { Order } from "../types/order";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
 import { Payment } from "../types/payment";
-import { Product } from "../types/product";
+import { Product, ProductQueryParams } from "../types/product";
 import { RegisterPayload, RegisterResponse } from "../types/register";
 import {
   ResetPasswordPayload,
   ResetPasswordResponse,
 } from "../types/reset-password";
+import { Review, ReviewPayload } from "../types/review";
 import { Shop } from "../types/shop";
 import { User } from "../types/user";
+import { VendorProduct } from "../types/vendor";
 import http from "./http";
 
 export const register = async (
@@ -511,7 +514,145 @@ export const getCurrencyByAdmin = async (cid: string): Promise<Currency> => {
   return data;
 };
 
-// export const getProducts = async <T = any>(
+export const getCompaignsByAdmin = async (
+  page: number,
+  search?: string
+): Promise<Compaign[]> => {
+  const { data } = await http.get<Compaign[]>(
+    `/admin/compaigns?page=${page || 1}&search=${search || ""}`
+  );
+  return data;
+};
+
+export const addCompaignByAdmin = async (
+  payload: Compaign
+): Promise<Compaign> => {
+  const { data } = await http.post<Compaign>(`/admin/compaigns`, payload);
+  return data;
+};
+
+export const updateCompaignByAdmin = async ({
+  currentSlug,
+  ...payload
+}: Compaign & { currentSlug: string }): Promise<Compaign> => {
+  const { data } = await http.put<Compaign>(
+    `/admin/compaigns/${currentSlug}`,
+    payload
+  );
+  return data;
+};
+
+export const getCompaignByAdmin = async (slug: string): Promise<Compaign> => {
+  const { data } = await http.get<Compaign>(`/admin/compaigns/${slug}`);
+  return data;
+};
+
+export const deleteCompaignByAdmin = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data } = await http.delete<{ message: string }>(
+    `/admin/compaigns/${slug}`
+  );
+  return data;
+};
+
+// ------------------- Vendor -------------------
+
+export const getVendorProductBySlug = async (
+  slug: string
+): Promise<VendorProduct> => {
+  const { data } = await http.get<VendorProduct>(`/vendor/products/${slug}`);
+  return data;
+};
+
+export const getVendorShop = async (): Promise<any> => {
+  const { data } = await http.get(`/vendor/shop`);
+  return data;
+};
+
+export const vendorDashboardAnalytics = async (): Promise<any> => {
+  const { data } = await http.get(`/vendor/dashboard-analytics`);
+  return data;
+};
+
+export const getVendorLowStockProducts = async (
+  page: number
+): Promise<VendorProduct[]> => {
+  const { data } = await http.get<VendorProduct[]>(
+    `/vendor/low-stock-products?page=${page}`
+  );
+  return data;
+};
+
+export const getVendorProducts = async (
+  page: number,
+  search?: string
+): Promise<VendorProduct[]> => {
+  const { data } = await http.get<VendorProduct[]>(
+    `/vendor/products?search=${search || ""}&page=${page}`
+  );
+  return data;
+};
+
+export const deleteVendorProduct = async (
+  slug: string
+): Promise<{ message: string }> => {
+  const { data } = await http.delete<{ message: string }>(
+    `/vendor/products/${slug}`
+  );
+  return data;
+};
+
+export const createVendorProduct = async (
+  payload: VendorProduct
+): Promise<VendorProduct> => {
+  const { data } = await http.post<VendorProduct>(`/vendor/products`, payload);
+  return data;
+};
+
+export const updateVendorProduct = async ({
+  currentSlug,
+  ...payload
+}: VendorProduct & { currentSlug: string }): Promise<VendorProduct> => {
+  const { data } = await http.put<VendorProduct>(
+    `/vendor/products/${currentSlug}`,
+    payload
+  );
+  return data;
+};
+
+export const getOrdersByVendor = async (params: string): Promise<any[]> => {
+  const { data } = await http.get<any[]>(`/vendor/orders?${params}`);
+  return data;
+};
+
+export const addShopByVendor = async (payload: any): Promise<any> => {
+  const { data } = await http.post(`/vendor/shops`, payload);
+  return data;
+};
+
+export const updateShopByVendor = async ({
+  currentSlug,
+  ...payload
+}: { currentSlug: string } & any): Promise<any> => {
+  const { data } = await http.put(`/vendor/shops/${currentSlug}`, payload);
+  return data;
+};
+
+export const getShopDetailsByVendor = async (): Promise<any> => {
+  const { data } = await http.get(`/vendor/shop/stats`);
+  return data;
+};
+
+export const getIncomeByVendor = async (
+  slug?: string,
+  page?: number
+): Promise<any> => {
+  const { data } = await http.get(`/vendor/shops/income?page=${page || 1}`);
+  return data;
+};
+
+// export const getProducts = async (
 //   query = "",
 //   category?: string,
 //   rate?: number
@@ -519,3 +660,116 @@ export const getCurrencyByAdmin = async (cid: string): Promise<Currency> => {
 //   const { data } = await http.get<T>(`/products${query || "?"}&rate=${rate}`);
 //   return data;
 // };
+
+// ------------------- Products -------------------
+
+export const getProducts = async ({
+  query = "",
+  rate,
+}: ProductQueryParams = {}): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(
+    `/products${query || "?"}&rate=${rate ?? ""}`
+  );
+  return data;
+};
+
+export const getProductDetails = async (pid: string): Promise<any> => {
+  const { data } = await http.get(`/products/${pid}`);
+  return data;
+};
+
+export const getProductsByCategory = async ({
+  category,
+  query = "",
+  rate,
+}: ProductQueryParams): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(
+    `/category/products/${category}${query || "?"}&rate=${rate ?? ""}`
+  );
+  return data;
+};
+
+export const getProductsBySubCategory = async ({
+  subcategory,
+  query = "",
+  rate,
+}: ProductQueryParams): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(
+    `/subcategory/products/${subcategory}${query || "?"}&rate=${rate ?? ""}`
+  );
+  return data;
+};
+
+export const getProductsByShop = async ({
+  shop,
+  query = "",
+  rate,
+}: ProductQueryParams): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(
+    `/shop/products/${shop}${query || "?"}&rate=${rate ?? ""}`
+  );
+  return data;
+};
+
+export const getProductsByCompaign = async ({
+  query = "",
+  slug,
+  rate,
+}: ProductQueryParams & { slug: string }): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(
+    `/compaign/products/${slug}${query || "?"}&rate=${rate ?? ""}`
+  );
+  return data;
+};
+
+export const getProductSlugs = async (): Promise<string[]> => {
+  const { data } = await http.get<string[]>(`/products-slugs`);
+  return data;
+};
+
+export const getAllProducts = async (): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(`/products/all`);
+  return data;
+};
+
+export const getAllFilters = async (): Promise<any> => {
+  const { data } = await http.get(`/products/filters`);
+  return data;
+};
+
+export const getNewProducts = async (): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(`/products/new`);
+  return data;
+};
+
+export const getFiltersByShop = async (shop: string): Promise<any> => {
+  const { data } = await http.get(`/filters/${shop}`);
+  return data;
+};
+
+export const getNewArrivals = async (): Promise<Product[]> => {
+  const { data } = await http.get("/new-arrivals");
+  return data;
+};
+
+export const getRelatedProducts = async (pid: string): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>(`/related-products/${pid}`);
+  return data;
+};
+
+export const getProductBySlug = async (slug: string): Promise<Product> => {
+  const { data } = await http.get<Product>(`/products/${slug}`);
+  return data;
+};
+
+// ------------------- Reviews -------------------
+
+export const getProductReviews = async (pid: string): Promise<Review[]> => {
+  const { data } = await http.get<Review[]>(`/reviews/${pid}`);
+  return data;
+};
+
+export const addReview = async (payload: ReviewPayload): Promise<Review> => {
+  const { data } = await http.post<Review>(`/reviews`, payload);
+  return data;
+};

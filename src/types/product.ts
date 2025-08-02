@@ -37,3 +37,11 @@ export interface Product {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface ProductQueryParams {
+  query?: string;
+  category?: string;
+  subcategory?: string;
+  shop?: string;
+  rate?: number;
+}
