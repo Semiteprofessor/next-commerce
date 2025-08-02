@@ -35,3 +35,9 @@ export interface UserState {
   user: User | null;
   followingShops: string[];
 }
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  phone?: string;
+}
