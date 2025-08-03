@@ -11,8 +11,10 @@ import {
 } from "../types/admin";
 import { AuthResponse } from "../types/auth";
 import { Brand } from "../types/brand";
+import { CartResponse } from "../types/cart";
 import { Category } from "../types/category";
 import { Compaign } from "../types/compaign";
+import { CompareProduct } from "../types/compare";
 import { CouponCode } from "../types/coupon-code";
 import { Currency } from "../types/currency";
 import { ForgetPasswordPayload } from "../types/forgot-password";
@@ -20,7 +22,11 @@ import { LoginPayload } from "../types/login";
 import { NewsletterPayload } from "../types/newsletter";
 import { Order } from "../types/order";
 import { ResendOTPPayload, VerifyOTPPayload } from "../types/otp";
-import { Payment } from "../types/payment";
+import {
+  Payment,
+  PaymentIntentPayload,
+  PaymentIntentResponse,
+} from "../types/payment";
 import { Product, ProductQueryParams } from "../types/product";
 import { RegisterPayload, RegisterResponse } from "../types/register";
 import {
@@ -32,6 +38,7 @@ import { SearchPayload } from "../types/search";
 import { Shop } from "../types/shop";
 import { User, UserProfile } from "../types/user";
 import { VendorProduct } from "../types/vendor";
+import { WishlistResponse } from "../types/wishlist";
 import http from "./http";
 
 export const register = async (
@@ -872,5 +879,108 @@ export const sendNewsletter = async (
     "/newsletter",
     payload
   );
+  return data;
+};
+
+// Wishlist
+export const getWishlist = async (): Promise<WishlistResponse> => {
+  const { data } = await http.get<WishlistResponse>("/wishlist");
+  return data;
+};
+
+export const updateWishlist = async (
+  pid: string
+): Promise<WishlistResponse> => {
+  const { data } = await http.post<WishlistResponse>("/wishlist", { pid });
+  return data;
+};
+
+// Product comparison
+export const getCompareProducts = async (
+  products: string[]
+): Promise<CompareProduct> => {
+  const { data } = await http.post<CompareProduct>("/compare/products", {
+    products,
+  });
+  return data;
+};
+
+// User profile
+export const getProfile = async (): Promise<UserProfile> => {
+  const { data } = await http.get<UserProfile>("/users/profile");
+  return data;
+};
+
+// Cart
+export const getCart = async (ids: string[]): Promise<CartResponse> => {
+  const { data } = await http.post<CartResponse>("/cart", { products: ids });
+  return data;
+};
+
+// Categories
+export const getAllCategories = async (): Promise<Category[]> => {
+  const { data } = await http.get<Category[]>("/all-categories");
+  return data;
+};
+
+export const getHomeCategories = async (): Promise<Category[]> => {
+  const { data } = await http.get<Category[]>("/home/categories");
+  return data;
+};
+
+// Shops
+export const getHomeShops = async (): Promise<Shop[]> => {
+  const { data } = await http.get<Shop[]>("/shops?limit=5");
+  return data;
+};
+
+// Compaigns
+export const getHomeCompaigns = async (): Promise<Compaign[]> => {
+  const { data } = await http.get<Compaign[]>("/compaigns");
+  return data;
+};
+
+// Products
+export const getBestSellingProducts = async (): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>("/home/products/best-selling");
+  return data;
+};
+
+export const getFeaturedProducts = async (): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>("/home/products/featured");
+  return data;
+};
+
+export const getTopRatedProducts = async (): Promise<Product[]> => {
+  const { data } = await http.get<Product[]>("/home/products/top");
+  return data;
+};
+
+// Brands
+export const getHomeBrands = async (): Promise<any[]> => {
+  const { data } = await http.get<any[]>("/home/brands");
+  return data;
+};
+
+export const getBrands = async (): Promise<any[]> => {
+  const { data } = await http.get<any[]>("/brands");
+  return data;
+};
+
+// Coupon codes
+export const applyCouponCode = async (code: string): Promise<CouponCode> => {
+  const { data } = await http.get<CouponCode>(`/coupon-codes/${code}`);
+  return data;
+};
+
+// Payment
+export const paymentIntents = async ({
+  amount,
+  currency,
+}: PaymentIntentPayload): Promise<PaymentIntentResponse> => {
+  const { data } = await http.post<PaymentIntentResponse>("/payment-intents", {
+    amount,
+    currency,
+  });
   return data;
 };
