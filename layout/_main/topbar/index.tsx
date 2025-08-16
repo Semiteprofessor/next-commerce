@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 // icons
 import { MdOutlinePhone, MdOutlineMail } from "react-icons/md";
 import { Skeleton } from "@/components/ui/skeleton";
-// import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 
 // Lazy load UserSelect with skeleton fallback
 // const UserSelect = dynamic(() => import("src/components/select/userSelect"), {
@@ -29,20 +29,20 @@ export default function UserTopbar() {
   //   );
 
   return (
-    <div className="hidden md:flex w-full bg-background border-b z-50 bg-red-600">
+    <div className="hidden md:flex w-full bg-background-default border-b z-50">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-2 text-sm">
         {/* Left side - contact info */}
         <div className="flex items-center gap-2">
           <Link
             href="tel:+13866883295"
-            className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
+            className="flex items-center gap-1 text-red-600 hover:text-foreground"
           >
             <MdOutlinePhone /> +1 386-688-3295
           </Link>
-          {/* <Separator orientation="vertical" className="h-4" /> */}
+          <Separator orientation="vertical" className="h-4" />
           <Link
             href="mailto:johndoe@yahoo.com"
-            className="flex items-center gap-1 text-muted-foreground hover:text-foreground"
+            className="flex items-center gap-1 text-red-600 hover:text-foreground"
           >
             <MdOutlineMail /> johndoe@yahoo.com
           </Link>
