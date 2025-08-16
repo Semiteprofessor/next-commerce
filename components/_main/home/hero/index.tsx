@@ -5,18 +5,18 @@ import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card";
 
 // Lazy load components (like MUI’s Suspense use case)
-const MegaMenu = dynamic(
-  () => import("src/components/mega-menu/MegaMenuDesktopVertical"),
-  {
-    suspense: true,
-  }
-);
-const SingleSlideCarousel = dynamic(
-  () => import("src/components/carousels/singleSlide"),
-  {
-    ssr: false,
-  }
-);
+// const MegaMenu = dynamic(
+//   () => import("src/components/mega-menu/MegaMenuDesktopVertical"),
+//   {
+//     suspense: true,
+//   }
+// );
+// const SingleSlideCarousel = dynamic(
+//   () => import("src/components/carousels/singleSlide"),
+//   {
+//     ssr: false,
+//   }
+// );
 
 import { data } from "./data";
 
@@ -36,14 +36,15 @@ export default function Hero({ className }: HeroProps) {
               </div>
             }
           >
-            <MegaMenu />
+            {/* <MegaMenu /> */}
+            Hellooooooooooooooooooooooooooo
           </Suspense>
         </CardContent>
       </Card>
 
       <Card className="flex-1 shadow-lg rounded-2xl">
         <CardContent className="p-0">
-          <SingleSlideCarousel data={data} />
+          {/* <SingleSlideCarousel data={data} /> */}
         </CardContent>
       </Card>
     </div>
