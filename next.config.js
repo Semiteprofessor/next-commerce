@@ -16,7 +16,7 @@ const nextConfig = {
   },
   images: {
     domains: [
-      'nextall.vercel.app"',
+      'next.vercel.app"',
       "res.cloudinary.com",
       "d20dbqvplpyrs7.cloudfront.net",
     ],

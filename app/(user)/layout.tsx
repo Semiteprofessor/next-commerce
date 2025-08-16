@@ -10,23 +10,17 @@ import Topbar from "../../layout/_main/topbar";
 // Meta information
 export const metadata = {
   title:
-    "Nextall E-commerce Script | Your Gateway to Seamless Shopping and Secure Transactions",
+    "Next E-commerce Script | Your Gateway to Seamless Shopping and Secure Transactions",
   description:
-    "Log in to Nextall for secure access to your account. Enjoy seamless shopping, personalized experiences, and hassle-free transactions. Your trusted portal to a world of convenience awaits. Login now!",
-  applicationName: "Nextall",
-  authors: [{ name: "Nextall" }],
-  keywords: [
-    "ecommerce",
-    "Nextall",
-    "Commerce",
-    "Login Nextall",
-    "LoginFrom Nextall",
-  ],
+    "Log in to Next for secure access to your account. Enjoy seamless shopping, personalized experiences, and hassle-free transactions. Your trusted portal to a world of convenience awaits. Login now!",
+  applicationName: "Next",
+  authors: [{ name: "Next" }],
+  keywords: ["ecommerce", "Next", "Commerce", "Login Next", "LoginFrom Next"],
   icons: {
     icon: "/favicon.png",
   },
   openGraph: {
-    images: "https://nextall.vercel.app/opengraph-image.png?1c6a1fa20db2840f",
+    images: "https://Next.vercel.app/opengraph-image.png?1c6a1fa20db2840f",
   },
 };
 
